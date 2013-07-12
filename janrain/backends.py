@@ -1,6 +1,8 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from hashlib import sha1
 from base64 import b64encode
+
+User = get_user_model()
 
 
 class JanrainBackend(object):
@@ -26,8 +28,7 @@ class JanrainBackend(object):
                 )
             u.set_unusable_password()
             u.is_active = True
-            u.is_staff = False
-            u.is_superuser = False
+            u.is_admin = False
             u.save()
         return u
 
